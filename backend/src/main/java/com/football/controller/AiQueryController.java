@@ -16,7 +16,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/ai")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "https://mohit-0717.github.io"
+})
 @RequiredArgsConstructor
 public class AiQueryController {
 

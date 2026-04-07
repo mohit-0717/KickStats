@@ -5,9 +5,9 @@ spring:
 
   # Database Configuration
   datasource:
-    url: jdbc:mysql://localhost:3306/football?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: admin717
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/football?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:admin717}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   # JPA/Hibernate Configuration
@@ -44,7 +44,7 @@ spring:
 
 # Server Configuration
 server:
-  port: 9090
+  port: ${PORT:9090}
   servlet:
     context-path: /FootballBackendAPI
   error:

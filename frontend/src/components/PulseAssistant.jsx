@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import PulseAiMark from './PulseAiMark';
 
 const MAX_VISIBLE_FIELDS = 4;
+const AI_SERVICE_BASE_URL = (import.meta.env.VITE_AI_SERVICE_URL || 'http://localhost:8001').replace(/\/$/, '');
+const BACKEND_BASE_URL = (import.meta.env.VITE_BACKEND_URL || 'http://localhost:9090/FootballBackendAPI').replace(/\/$/, '');
 
 const formatAssistantError = (message) => {
     const fallback = 'Pulse AI could not ground that answer in the live football database. Try a clearer stat, fixture, or transfer query.';
@@ -282,7 +284,7 @@ const PulseAssistant = () => {
         ]);
 
         try {
-            const aiResponse = await fetch('http://localhost:8001/ai/pulse-assistant', {
+            const aiResponse = await fetch(`${AI_SERVICE_BASE_URL}/ai/pulse-assistant`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ query: interpretedQuery })
@@ -309,7 +311,7 @@ const PulseAssistant = () => {
             }
 
             const generatedSql = aiPayload.generated_sql ?? payload;
-            const dbResponse = await fetch('http://localhost:9090/FootballBackendAPI/api/ai/execute-sql', {
+            const dbResponse = await fetch(`${BACKEND_BASE_URL}/api/ai/execute-sql`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ sql: generatedSql })
@@ -322,7 +324,7 @@ const PulseAssistant = () => {
 
             let summaryText = '';
             if (Array.isArray(dbPayload) && dbPayload.length > 0) {
-                const summaryResponse = await fetch('http://localhost:8001/ai/summarize-results', {
+                const summaryResponse = await fetch(`${AI_SERVICE_BASE_URL}/ai/summarize-results`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
