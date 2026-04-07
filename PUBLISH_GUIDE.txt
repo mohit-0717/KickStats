@@ -1,0 +1,104 @@
+KickStats
+Smart Football Statistics Dashboard
+
+==================================================
+1) Prerequisites
+==================================================
+- Git
+- Node.js 20+ and npm
+- Java 17+ and Maven
+- Python 3.11+
+
+==================================================
+2) Project Structure
+==================================================
+- frontend   -> Vite + React UI
+- backend    -> Spring Boot API (:9090/FootballBackendAPI)
+- ai-service -> FastAPI AI router (:8001)
+
+==================================================
+3) Environment Setup
+==================================================
+Create local .env files (DO NOT COMMIT):
+
+ai-service/.env
+GROQ_API_KEY=...
+CEREBRAS_API_KEY=...   (if used)
+DEEPSEEK_API_KEY=...   (if used)
+
+==================================================
+4) Run Locally
+==================================================
+Frontend:
+cd frontend
+npm install
+npm run dev
+
+Backend:
+cd backend
+mvn spring-boot:run
+
+Note: Correct command is mvn spring-boot:run (no trailing dot).
+
+AI Service:
+cd ai-service
+pip install -r requirements.txt
+uvicorn main:app --host 0.0.0.0 --port 8001 --reload
+
+==================================================
+5) Push Fresh to GitHub (Safe)
+==================================================
+git status
+git add .
+git commit -m "Final UI + deploy setup"
+git push -u origin main
+
+If push is blocked by secret scanning:
+1. Remove secrets from tracked files (.env, hardcoded keys).
+2. Ensure .env is in .gitignore.
+3. If secret is in old commits, rewrite history (or start fresh history).
+4. Push again.
+
+==================================================
+6) Deploy Frontend to GitHub Pages
+==================================================
+Already configured:
+- frontend/vite.config.js has base: /KickStats/
+- frontend/package.json scripts:
+  predeploy = npm run build
+  deploy    = gh-pages -d dist
+
+Deploy steps:
+cd frontend
+npm install
+npm run deploy
+
+Then in GitHub:
+1. Repo Settings > Pages
+2. Source: Deploy from a branch
+3. Branch: gh-pages / root
+4. Save
+
+Expected URL:
+https://mohit-0717.github.io/KickStats/
+
+==================================================
+7) Quick Troubleshooting
+==================================================
+Error: ModuleNotFoundError: No module named 'openai'
+Fix: pip install openai
+
+Error: Could not find goal 'run.'
+Fix: mvn spring-boot:run
+
+Error: 502 Bad Gateway
+Fix:
+- Ensure backend is running on :9090
+- Ensure ai-service is running on :8001
+- Verify frontend uses correct endpoint URLs
+
+==================================================
+8) Brand
+==================================================
+Name: KickStats
+Tagline: Smart Football Statistics Dashboard
