@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Roboto+Condensed:wght@700;800&display=swap');
+
+:root {
+    --bg-dark: #07111c;
+    --bg-deep: #0f1c2d;
+    --card-bg: rgba(17, 28, 45, 0.62);
+    --surface-2: rgba(12, 19, 31, 0.74);
+    --accent: #6fe38e;
+    --accent-2: #93a4b8;
+    --text-main: #f3f7fb;
+    --text-muted: #99a6b6;
+    --border-soft: rgba(255, 255, 255, 0.09);
+    --heading-font: "Roboto Condensed", "Inter", sans-serif;
+    --body-font: "Inter", sans-serif;
+    --mono-font: "JetBrains Mono", monospace;
+    color: var(--text-main);
+    background:
+        radial-gradient(circle at top left, rgba(111, 227, 142, 0.07), transparent 24%),
+        radial-gradient(circle at top right, rgba(77, 95, 121, 0.12), transparent 22%),
+        linear-gradient(180deg, #07111c 0%, #0c1726 46%, #101a2b 100%);
+    font-family: var(--body-font);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: inherit;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--heading-font);
+    font-stretch: condensed;
+    letter-spacing: -0.02em;
+}
+
+code,
+.section-kicker,
+.sidebar-kicker,
+.panel-tag,
+.metric-list,
+.chip-row span,
+.timeline-minute {
+    font-family: var(--mono-font);
+}
